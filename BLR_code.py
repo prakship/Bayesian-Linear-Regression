@@ -1,12 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# PROGRAMMING PROJECT 1
-
 # Inserting libraries
-
-# In[190]:
-
 
 import math
 import random
@@ -18,8 +13,6 @@ import matplotlib.pyplot as plt
 
 # Function to load csv files 
 
-# In[191]:
-
 
 def get_CSVFile(filename):
     with open(filename) as file:
@@ -30,8 +23,6 @@ def get_CSVFile(filename):
 
 # Function to convert dataset to a matrix for computation purpose
 
-# In[274]:
-
 
 def load_Dataset(filename):
     dataset = get_CSVFile(filename)
@@ -40,12 +31,10 @@ def load_Dataset(filename):
     return floatMatrix
 
 
-# Task 1 : Evaluating MSE for each dataset -training and test- with lambda values in range(0,150)
+# Task.1 Evaluating MSE for each dataset -training and test- with lambda values in range(0,150)
 # 
 # Note : (a)Here we use the simple basis function which is phi(x) = x, where phi will be the design matrix
 # (b) w is the parameter matrix
-
-# In[275]:
 
 
 def evaluate_W(phi, t, lmb):
@@ -57,8 +46,6 @@ def evaluate_W(phi, t, lmb):
 
 
 # Function to evaluate MSE when lambda is known
-
-# In[276]:
 
 
 def evaluate_MSE_lambdaGiven(test, testR, train, trainR, lmb):
@@ -79,8 +66,6 @@ def evaluate_MSE_lambdaGiven(test, testR, train, trainR, lmb):
 
 # Function to evaluate MSE for lambda ranging from 0 to 150
 
-# In[277]:
-
 
 def MSE_evaluate(test, testR, train, trainR):
     MSE_train = np.zeros(151)
@@ -92,9 +77,7 @@ def MSE_evaluate(test, testR, train, trainR):
     return MSE_test, MSE_train
 
 
-# Evaluating MSE for all 5 datasets and plotting Test and Train MSE
-
-# In[315]:
+# Task.1(implemented) Evaluating MSE for all 5 datasets and plotting Test and Train MSE
 
 
 #dataset artificial 1
@@ -155,6 +138,7 @@ ax2 = fig.add_subplot(5,1,2)
 ax3 = fig.add_subplot(5,1,3)
 ax4 = fig.add_subplot(5,1,4)
 ax5 = fig.add_subplot(5,1,5)
+
 #artificial dataset 100-10
 ax1.plot(x_axis,a1[1],'g', label='Train')
 ax1.plot(x_axis,a1[0],'r', label = 'Test')
@@ -162,6 +146,7 @@ ax1.set_title('MSE Train vs Test')
 ax1.legend(('Train','Test'))
 ax1.set_ylabel('MSE')
 ax1.set_xlabel('Lambda')
+
 #artificial dataset 100-100
 ax2.plot(x_axis,a2[1],'g', label='Train')
 ax2.plot(x_axis,a2[0],'r', label = 'Test')
@@ -169,6 +154,7 @@ ax1.set_title('MSE Train vs Test')
 ax2.legend(('Train','Test'))
 ax2.set_ylabel('MSE')
 ax2.set_xlabel('Lambda')
+
 #artificial dataset 1000-100
 ax3.plot(x_axis,a3[1],'g', label='Train')
 ax3.plot(x_axis,a3[0],'r', label = 'Test')
@@ -176,6 +162,7 @@ ax1.set_title('MSE Train vs Test')
 ax3.legend(('Train','Test'))
 ax3.set_ylabel('MSE')
 ax3.set_xlabel('Lambda')
+
 #dataset crime
 ax4.plot(x_axis,a4[1],'g', label='Train')
 ax4.plot(x_axis,a4[0],'r', label = 'Test')
@@ -183,6 +170,7 @@ ax1.set_title('MSE Train vs Test')
 ax4.legend(('Train','Test'))
 ax4.set_ylabel('MSE')
 ax4.set_xlabel('Lambda')
+
 #dataset wine
 ax5.plot(x_axis,a5[1],'g', label='Train')
 ax5.plot(x_axis,a5[0],'r', label = 'Test')
@@ -195,9 +183,7 @@ fig.savefig('Task1.png')
 plt.show()
 
 
-# Task 2 : Function to evaluate MSE by splitting dataset into subsets for showing the learning curve
-
-# In[327]:
+# Task.2 Function to evaluate MSE by splitting dataset into subsets for showing the learning curve
 
 
 def task2_LearningCurve(phi_train, t_train, phi_test, t_test, lmb, subsetNumber):
@@ -241,8 +227,6 @@ def task2_LearningCurve(phi_train, t_train, phi_test, t_test, lmb, subsetNumber)
 
 # Plotting the learning curve for 'train-1000-100.csv' for three different lambda values
 
-# In[328]:
-
 
 #lambda too small = 3 and 50 training subsets
 task2_LearningCurve(phi_test3, t_test3, phi_train3, t_train3, 3, 50)
@@ -252,11 +236,9 @@ task2_LearningCurve(phi_test3, t_test3, phi_train3, t_train3, 27, 50)
 task2_LearningCurve(phi_test3, t_test3, phi_train3, t_train3, 120, 50)
 
 
-# Task 3.1: Model Selection using Cross Validation 
+# Model Selection using Cross Validation 
 
 # Function to split training data into  k-folds 
-
-# In[329]:
 
 
 def crossValidationSplit(train,trainR, k):
@@ -273,9 +255,7 @@ def crossValidationSplit(train,trainR, k):
     return np.array(phi_subset), np.array(t_subset)
 
 
-# Function to carry out k-fold cross validation and plot MSE train against lambda values
-
-# In[390]:
+# Task 3.1 Function to carry out k-fold cross validation and plot MSE train against lambda values
 
 
 def task31_crossValidation(train, trainR, test, testR, k):
@@ -309,10 +289,9 @@ def task31_crossValidation(train, trainR, test, testR, k):
             
 
 
-# Task 3.1 implemented on different datasets
-
-# In[391]:
-
+# Carried out k-fold cross validation and plot MSE train against lambda values for all the datasets
+# Time performance checked 
+# k=10
 
 import time
 t1 = time.time()
@@ -338,9 +317,6 @@ print('Time taken to run:'+str(t10-t9))
 
 
 # Task 3.2: Bayesian Model selection method
-
-# In[392]:
-
 
 #iterations to evaluate the best beta, alpha values
 #taking random values of alpha and beta in 1 to 10
@@ -377,8 +353,6 @@ def task32_BayesianModelSelection(phi, t, alpha, beta, iterations):
 
 # Function to evaluate the test MSE once model is selected
 
-# In[387]:
-
 
 def MSEtest_BayesianModelSelection(test, testR, M_N):
     wT = np.transpose(M_N)
@@ -392,8 +366,6 @@ def MSEtest_BayesianModelSelection(test, testR, M_N):
 
 # Running Bayesian model selection on all the datasets
 
-# In[389]:
-
 
 data1 = task32_BayesianModelSelection(phi_train1, t_train1, 1, 5, 5)
 print('MSE-100-10 : '+str(MSEtest_BayesianModelSelection(phi_test1, t_test1, data1)))
@@ -405,10 +377,5 @@ data4 = task32_BayesianModelSelection(phi_train4, t_train4, 1, 5, 20)
 print('MSE-crime : '+str(MSEtest_BayesianModelSelection(phi_test4, t_test4, data4)))
 data5 = task32_BayesianModelSelection(phi_train5, t_train5, 1, 5, 20)
 print('MSE-wine : '+str(MSEtest_BayesianModelSelection(phi_test5, t_test5, data5)))
-
-
-# In[ ]:
-
-
 
 
