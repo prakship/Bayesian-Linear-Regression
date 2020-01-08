@@ -1,4 +1,4 @@
-### Carried out Bayesian Regularized Linear Regression from scratch on two real-world datasets crime.csv and wine.csv
+### Carried out Model selection in Bayesian Linear Regression from scratch
 
 - Defined functions to evaluate the optimal solution of posterior distribution.
 - Next defined functions to evaluate Mean-square-error(MSE), which is used as the measure of accuracy of different models while varying the regularizing parameter.
